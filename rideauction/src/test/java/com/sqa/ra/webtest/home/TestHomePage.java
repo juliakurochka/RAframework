@@ -32,6 +32,7 @@ public class TestHomePage extends WebDriverTest{
 				 loginWithValidUserId("sdfdf","dvdfgg");
 		 //Verify User Logo On Home Page
 		 //homepage.verifyUserLogo
+		 //making change for test
 	  homePage.verifyHomePageLinks();
 	}
 	
