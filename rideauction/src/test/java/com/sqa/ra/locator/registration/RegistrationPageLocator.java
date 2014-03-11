@@ -17,6 +17,7 @@ public interface RegistrationPageLocator {
 	By ERROR_MSG=By.id("login_error");
 	
 	By LOGIN_LINK=By.linkText("Log in");
+	//Add more Locators
 	
 
 }
