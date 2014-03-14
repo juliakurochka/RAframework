@@ -67,7 +67,7 @@ public class RACouponAdapter {
 	public RACoupon getCoupon(String couponCode){
 		
 		logger.info("start of coupon method");
-		String Query="select count(*) from  tblcoupons where CouponCode='"+
+		String Query="select * from  tblcoupons where CouponCode='"+
 		couponCode+"' AND CouponCount > 0";
 		ResultSet rs=RADatabaseAdapter.executeQuery(Query);
 		RACoupon coupon=new RACoupon();
