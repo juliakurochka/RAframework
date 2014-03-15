@@ -14,6 +14,7 @@ public class PropertyManager {
 			
 		}
 	public static String getProperty(String key) {
+		String value=System.getProperty(key);
 		if (props == null) {
 			props = new Properties();
 			try {
@@ -29,10 +30,11 @@ public class PropertyManager {
 				ie.printStackTrace();
 			}
 		}
-		String value=props.getProperty(key);
-		System.out.println("value of key="+key+" value"+value);
+		//String value=props.getProperty(key);
+		//System.out.println("value of key="+key+" value"+value);
 		if(value==null){
-			value=System.getProperty(key);
+			 value=props.getProperty(key);
+			
 		}
 		System.out.println("value of key="+key+" value"+value);
 		return value;

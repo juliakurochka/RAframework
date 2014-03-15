@@ -32,10 +32,12 @@ public class RAPropertyManager {
 		
 	}
 	public static  String getProperty(String key){
-		String value=getProprties().getProperty(key);
+		String value=System.getProperty(key);
+		//String value=getProprties().getProperty(key);
 		System.out.println("value of key="+key+" value"+value);
 		if(value==null){
-			value=System.getProperty(key);
+			//value=System.getProperty(key);
+			 value=getProprties().getProperty(key);
 		}
 		System.out.println("value of key="+key+" value"+value);
 		return value;
