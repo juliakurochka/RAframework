@@ -26,7 +26,7 @@ public class WebDriverManager {
 		} else if ("ie".equalsIgnoreCase(browser)) {
 			
 			File file = new File(PropertyManager.getProperty("InternetExplorerServerPath"));
-			//get the path of webdriver exe
+			//get the path of webdriver exe 
 			
 			System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 
