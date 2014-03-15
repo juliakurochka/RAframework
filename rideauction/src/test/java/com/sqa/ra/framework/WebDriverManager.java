@@ -3,7 +3,6 @@ package com.sqa.ra.framework;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,17 +16,12 @@ public class WebDriverManager {
 		WebDriver driver;
 		String browser = PropertyManager.getProperty("browser");
 		if ("firefox".equalsIgnoreCase(browser)) {
-			DesiredCapabilities cap=DesiredCapabilities.firefox();
-			//cap.setVersion("3.7");
-			//cap.setPlatform(Platform.WINDOWS);
-			//cap.set
-			driver = new FirefoxDriver(cap);
+			driver = new FirefoxDriver();
 
 		} else if ("ie".equalsIgnoreCase(browser)) {
 			
 			File file = new File(PropertyManager.getProperty("InternetExplorerServerPath"));
-			//get the path of webdriver exe 
-			
+			//get the path of webdriver exe
 			System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 
 			DesiredCapabilities capabilities = DesiredCapabilities. internetExplorer();
