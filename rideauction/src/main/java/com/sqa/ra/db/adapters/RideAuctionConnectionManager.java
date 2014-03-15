@@ -136,17 +136,17 @@ public class RideAuctionConnectionManager {
 public static Connection getConnection() {
 		
 		try {
-			Properties raProperties=RAPropertyManager.getProprties();
+			//Properties raProperties=RAPropertyManager.getProprties();
 			
 			// ���������� ������� MySQL
 			// Initiating MySQL driver
 			//Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Class.forName(raProperties.getProperty("DBDriver")).newInstance();		
+			Class.forName(RAPropertyManager.getProperty("DBDriver")).newInstance();		
 					
 			
 			// ������� � ��������� �����������
 			// Create and return a connection
-			return DriverManager.getConnection(raProperties.getProperty("DBUrl"), raProperties.getProperty("DBUserId"), raProperties.getProperty("DBPassword"));
+			return DriverManager.getConnection(RAPropertyManager.getProperty("DBUrl"), RAPropertyManager.getProperty("DBUserId"), RAPropertyManager.getProperty("DBPassword"));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

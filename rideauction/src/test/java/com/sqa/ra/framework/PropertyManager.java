@@ -29,8 +29,14 @@ public class PropertyManager {
 				ie.printStackTrace();
 			}
 		}
-
-		return props.getProperty(key);
+		String value=props.getProperty(key);
+		System.out.println("value of key="+key+" value"+value);
+		if(value==null){
+			value=System.getProperty(key);
+		}
+		System.out.println("value of key="+key+" value"+value);
+		return value;
+		//return props.getProperty(key);
 
 	}
 

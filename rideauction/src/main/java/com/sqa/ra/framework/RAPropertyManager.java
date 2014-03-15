@@ -26,7 +26,19 @@ public class RAPropertyManager {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		
 		return null;
+		
+		
+	}
+	public static  String getProperty(String key){
+		String value=getProprties().getProperty(key);
+		System.out.println("value of key="+key+" value"+value);
+		if(value==null){
+			value=System.getProperty(key);
+		}
+		System.out.println("value of key="+key+" value"+value);
+		return value;
 	}
 
 }
