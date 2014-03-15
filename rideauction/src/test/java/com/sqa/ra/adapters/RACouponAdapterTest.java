@@ -17,6 +17,7 @@ public class RACouponAdapterTest {
 		couponAdapter=new RACouponAdapter();
 		
 	}
+	
   @Test(expectedExceptions = RuntimeException.class)
   public void addMoreCoupon() {
     throw new RuntimeException("Test not implemented");
