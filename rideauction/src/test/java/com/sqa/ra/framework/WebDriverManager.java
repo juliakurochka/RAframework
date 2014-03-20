@@ -22,6 +22,7 @@ public class WebDriverManager {
 	public static final  String HUB_URL_KEY="hubUrl";
 	public static final  String BROSER_KEY="browser";
 	public static final  String DESIRED_PLATFORM_KEY="platform";
+	public static final  String DESIRED_BROWSER_VERSION="browserVersion";
 	
 	public static WebDriver getWebDriver() {
 		try{
@@ -30,7 +31,7 @@ public class WebDriverManager {
 		WebDriver driver;
 		String browser=PropertyManager.getProperty("browser");
 		String dsplatform= getProperty(DESIRED_PLATFORM_KEY);
-		String browserVersion= getProperty("version");
+		String browserVersion= getProperty(DESIRED_BROWSER_VERSION);
 		 DesiredCapabilities caps;
 		if("grid".equalsIgnoreCase(getProperty(MODE_KEY))){
 			if("firefox".equalsIgnoreCase(browser)){

@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 public class PropertyManager {
-	
+	static final Logger logger=Logger.getLogger(PropertyManager.class);
 	private static Properties props = null;
 
 		private PropertyManager(){
@@ -31,12 +33,13 @@ public class PropertyManager {
 			}
 		}
 		//String value=props.getProperty(key);
-		//System.out.println("value of key="+key+" value"+value);
+		//logger.debug("value of key="+key+" value"+value);
 		if(value==null){
 			 value=props.getProperty(key);
 			
 		}
-		System.out.println("value of key="+key+" value"+value);
+		//System.out.println("value of key="+key+" value"+value);
+		logger.debug("value of key="+key+" value"+value);
 		return value;
 		//return props.getProperty(key);
 
