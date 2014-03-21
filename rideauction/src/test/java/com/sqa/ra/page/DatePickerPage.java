@@ -60,11 +60,17 @@ public class DatePickerPage extends RAPage {
 	 */
 	public void verifyAndClickDate(String dateStr){
 		SimpleDateFormat sdf = new SimpleDateFormat("mm-DD-yyyy");
+		Date date=null;
 		try {
-			Date date = sdf.parse(dateStr);
+			 date = sdf.parse(dateStr);
+			
 		} catch (ParseException e) {
-			Assert.assertNotNull(null, e.getLocalizedMessage());
+			//Assert.assertNotNull(null, e.getLocalizedMessage());
+			Assert.assertNotNull(date,"Date object null can n't select a ate ");
+			logger.error("Error in parsing date", e);
 		}
+		
+		selectDate(date);
 	}
 	/**
 	 * Probably should have a string and a date format string
@@ -89,7 +95,7 @@ public class DatePickerPage extends RAPage {
 					+ " desYear: " + calDesired.get(Calendar.YEAR)
 					+ " currYear: "
 					+ Integer.parseInt(getElement(DATE_PICKER_YEAR).getText()));
-
+			
 			verifyAndClick(DATE_PKR_NEXT_MONTH);
 		}
 		while (calDesired.get(Calendar.YEAR) < Integer.parseInt(getElement(
@@ -134,9 +140,9 @@ public class DatePickerPage extends RAPage {
 				verifyAndClick(DATE_PKR_NEXT_MONTH);
 			}
 		} while (desMon != curMon);
-
-		verifyAndClick(By
-				.linkText(String.valueOf(calDesired.get(Calendar.DATE))));
+		By dateBy=By.linkText(String.valueOf(calDesired.get(Calendar.DATE)));
+		verifyElementEnabled(dateBy);
+		verifyAndClick(dateBy);
 	}
 
 

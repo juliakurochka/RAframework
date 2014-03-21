@@ -139,6 +139,10 @@ public abstract class RAPage {
 		Assert.assertTrue(elm.isEnabled());
 		
 	}
+	public void verifyElementContainText(By  elmLocator,String text){
+		Assert.assertTrue(getElement(elmLocator).getText().contentEquals(text));
+		
+	}
 	
 	public abstract void verifyPageElements();
 

@@ -33,6 +33,12 @@ public class RAHomePage extends RAPage{
 		return new LoginPage(driver);
 		
 	}
+	public BidOnRideToAirportPage clickOnBidOnRideToAirport(){
+		verifyAndClick(TO_AIRPORT_RADIO_BTN);
+		verifyAndClick(BID_ON_RIDE_AIRPORT_BTN);
+		return new BidOnRideToAirportPage(driver);
+		
+	}
 
 
 

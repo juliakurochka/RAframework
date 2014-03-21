@@ -14,6 +14,7 @@ public class Tomorrow {
 		return tomorrow;
 	}
 	
+	
 	public static void main(String args[]){
 		Date tomorrow = Tomorrow.getTomorrow();
 		System.out.println(tomorrow);
