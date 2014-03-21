@@ -12,9 +12,9 @@ import org.testng.Assert;
 public abstract class RAPage {
 	Logger logger=Logger.getLogger(RAPage.class);
 	protected WebDriver driver;
+	
 	public RAPage(WebDriver driver){
-		this.driver=driver;
-		
+		this.driver=driver;		
 	}
 	
 	/**
@@ -126,7 +126,11 @@ public abstract class RAPage {
 		wait.until(ExpectedConditions.presenceOfElementLocated(elmLocator));
 		
 	}
-	
+	public void waitForElementClickable(By elmLocator, long timeInSecs){
+		WebDriverWait wait = new WebDriverWait(driver, timeInSecs);
+		wait.until(ExpectedConditions.elementToBeClickable(elmLocator));
+	}
+
 	public void verifyElementSelected(By elmLocator){
 		WebElement elm=getElement(elmLocator);
 		Assert.assertNotNull(elm);

@@ -28,6 +28,7 @@ public class WebDriverTest {
 	protected WebDriver driver;
 	protected RAHomePage homePage;
 	Logger logger=Logger.getLogger(WebDriverTest.class);
+	
 	@BeforeMethod(alwaysRun=true)
 	public void runBeforeEachMethod(Method method){
 		logger.info("Starting new test case " +method.getName());

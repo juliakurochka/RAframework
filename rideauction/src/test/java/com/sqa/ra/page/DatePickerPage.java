@@ -34,12 +34,54 @@ public class DatePickerPage extends RAPage {
 		verifyElementPresent(SUN_DAY_HDR);
 		verifyElementPresent(DATE_PKR_NEXT_MONTH);
 		verifyElementPresent(DATE_PKR_PREV_MONTH);
+		waitForElementPresent(DATE_PKR_PREV_MONTH,10);
 	}
-	
+
+	/**
+	 * Verify Date element exist and click it
+	 * 
+	 * @param date - fixed format mm-DD-yyyy e.g. "12-31-2014" 
+	 */
+	public void verifyAndClickDate(String dateStr) {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		Date date = null;
+		try {
+			date = sdf.parse(dateStr);
+
+		} catch (ParseException e) {
+			// Assert.assertNotNull(null, e.getLocalizedMessage());
+			Assert.assertNotNull(date, "Date object null can't select a date ");
+			logger.error("Error in parsing date", e);
+		}
+
+		selectDate(date);
+	}
+
+	/**
+	 * Verify Date element exist and click it
+	 * @param dateStr - variable date format
+	 * @param dateFormat
+	 */
+	public void verifyAndClickDate(String dateStr, String dateFormat) {
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		Date date = null;
+		try {
+			date = sdf.parse(dateStr);
+
+		} catch (ParseException e) {
+			// Assert.assertNotNull(null, e.getLocalizedMessage());
+			Assert.assertNotNull(date, "Date object null can't select a date ");
+			logger.error("Error in parsing date", e);
+		}
+
+		selectDate(date);
+	}
+
 	/**
 	 * Select day relative to today
 	 * 
-	 * @param offsetFromToday - 0 = Today, 1 = Tomorrow, ..
+	 * @param offsetFromToday
+	 *            - 0 = Today, 1 = Tomorrow, ..
 	 */
 	public void verifyAndClickDate(int offsetFromToday) {
 		assertTrue(offsetFromToday >= 0 && offsetFromToday <= 180);
@@ -52,26 +94,7 @@ public class DatePickerPage extends RAPage {
 
 		selectDate(desiredDate);
 	}
-	
-	/**
-	 * String format is mm-DD-yyyy
-	 * e.g. "12-31-2014"  for New Years Eve
-	 * @param date
-	 */
-	public void verifyAndClickDate(String dateStr){
-		SimpleDateFormat sdf = new SimpleDateFormat("mm-DD-yyyy");
-		Date date=null;
-		try {
-			 date = sdf.parse(dateStr);
-			
-		} catch (ParseException e) {
-			//Assert.assertNotNull(null, e.getLocalizedMessage());
-			Assert.assertNotNull(date,"Date object null can n't select a ate ");
-			logger.error("Error in parsing date", e);
-		}
-		
-		selectDate(date);
-	}
+
 	/**
 	 * Probably should have a string and a date format string
 	 * 
@@ -95,7 +118,7 @@ public class DatePickerPage extends RAPage {
 					+ " desYear: " + calDesired.get(Calendar.YEAR)
 					+ " currYear: "
 					+ Integer.parseInt(getElement(DATE_PICKER_YEAR).getText()));
-			
+
 			verifyAndClick(DATE_PKR_NEXT_MONTH);
 		}
 		while (calDesired.get(Calendar.YEAR) < Integer.parseInt(getElement(
@@ -114,14 +137,13 @@ public class DatePickerPage extends RAPage {
 		// The java.text package provides collators to allow locale-sensitive
 		// ordering.
 		// Collator.compare(String, String)
-		
+
 		// Prev/Next until the Month is correct
-		int desMon= MONTH.getNum(desiredMonthStr);
+		int desMon = MONTH.getNum(desiredMonthStr);
 		int curMon = -1;
 		do {
-			
-			curMon = MONTH.getNum(getElement(
-					DATE_PICKER_MONTH).getText());
+
+			curMon = MONTH.getNum(getElement(DATE_PICKER_MONTH).getText());
 			if (desMon < curMon) {
 
 				logger.debug("PREV_MONTH: DesMonth: " + desiredMonthStr
@@ -140,11 +162,35 @@ public class DatePickerPage extends RAPage {
 				verifyAndClick(DATE_PKR_NEXT_MONTH);
 			}
 		} while (desMon != curMon);
-		By dateBy=By.linkText(String.valueOf(calDesired.get(Calendar.DATE)));
+		By dateBy = By.linkText(String.valueOf(calDesired.get(Calendar.DATE)));
 		verifyElementEnabled(dateBy);
 		verifyAndClick(dateBy);
 	}
-
+	
+//	 Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse("Feb");
+//	    Calendar cal = Calendar.getInstance();
+//	    cal.setTime(date);
+//	    int month = cal.get(Calendar.MONTH);
+//	    System.out.println(month == Calendar.FEBRUARY);
+	
+//	 import org.joda.time.DateTime;
+//	    import org.joda.time.format.DateTimeFormat;
+//	    import org.joda.time.format.DateTimeFormatter;
+//	    ...
+//
+//	    // if default locale is ok simply omit '.withLocale(...)'
+//	    DateTimeFormatter format = DateTimeFormat.forPattern("MMM");
+//	    DateTime instance        = format.withLocale(Locale.FRENCH).parseDateTime("août");  
+//
+//	    int month_number         = instance.getMonthOfYear();
+//	    String month_text        = instance.monthOfYear().getAsText(Locale.ENGLISH);
+//
+//	    System.out.println( "Month Number: " + month_number );
+//	    System.out.println( "Month Text:   " + month_text   );
+//
+//	    OUTPUT:
+//	        Month Number: 8
+//	        Month Text:   August
 
 	enum MONTH {
 		JAN(0, "January"), FEB(1, "February"), MAR(2, "March"), APR(3, "April"), MAY(
@@ -173,7 +219,8 @@ public class DatePickerPage extends RAPage {
 			for (MONTH m : EnumSet.allOf(MONTH.class))
 				lookup.put(m.getMonth(), m);
 		}
-		public static int getNum(String month){
+
+		public static int getNum(String month) {
 			return lookup.get(month).getNum();
 		}
 

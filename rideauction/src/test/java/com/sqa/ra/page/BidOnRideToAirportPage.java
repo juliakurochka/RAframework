@@ -34,11 +34,14 @@ public class BidOnRideToAirportPage extends RAPage{
 			String airport,String originAddress){
 		selectDropDownByVisibleText(PSNGR_DROP_DOWN, noPsngr);
 		//select a date using the date Picker Page
+		
+		verifyAndClick(DATE_PICKER);
 		DatePickerPage dp=new DatePickerPage(driver);
 		dp.verifyPageElements();
 		dp.verifyAndClickDate(pickUpDate);
-		selectDropDownByValue(HOUR, hour);
-		selectDropDownByValue(AIRPORT_DROP_DOWN, airport);
+		
+		selectDropDownByVisibleText(HOUR, hour);
+		selectDropDownByVisibleText(AIRPORT_DROP_DOWN, airport);
 		type(ORIGIN_ADDRS, originAddress);
 		verifyAndClick(PRICE_CHK_BTN);
 		
