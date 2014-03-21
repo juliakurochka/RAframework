@@ -48,6 +48,12 @@ public class RegistrationPage extends RAPage {
 		verifyAndClick(LoginPageLocator.BACKTO_RIDEAUCTION_LINK);
 		return new RAHomePage(driver);
 	}
+
+	@Override
+	public void verifyPageElements() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

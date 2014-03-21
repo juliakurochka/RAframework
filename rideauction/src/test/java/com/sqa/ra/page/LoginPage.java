@@ -13,7 +13,7 @@ public class LoginPage extends RAPage {
 		super(driver);
 	}
 	
-	public void verifyLoginPageEements(){
+	public void verifyPageElements(){
 		verifyElementPresent(LOGIN_BTN);
 		//Verify other Elements
 	}
@@ -30,6 +30,8 @@ public class LoginPage extends RAPage {
 		verifyAndClick(BACKTO_RIDEAUCTION_LINK);
 		return new RAHomePage(driver);
 	}
+
+	
 	
 	//Add the method for Lost Password page
 	

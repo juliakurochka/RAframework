@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class RAPage {
+public abstract class RAPage {
 	Logger logger=Logger.getLogger(RAPage.class);
 	protected WebDriver driver;
 	public RAPage(WebDriver driver){
@@ -139,6 +139,8 @@ public class RAPage {
 		Assert.assertTrue(elm.isEnabled());
 		
 	}
+	
+	public abstract void verifyPageElements();
 
 
 }

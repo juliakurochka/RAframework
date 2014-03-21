@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <!-- -->
-<suite name="FunctionalTestCases">
+<suite name="FunctionalTestCases" parallel="methods" thread-count="10">
 	<test name="module1testcases">
-		<groups>
+		<!--  <groups>
 			<run>
 				<exclude name="regressionTestCasesGroup"></exclude>
 
 			</run>
 
-		</groups>
+		</groups>-->
 		<packages>
-			<package name="com.ziffow.training.number"></package>
-			<package name="com.ziffow.training.countchar"></package>
-
+			<package name="com.sqa.ra.webtest.*"></package>
 		</packages>
 
 

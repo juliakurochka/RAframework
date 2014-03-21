@@ -14,16 +14,16 @@ public class TestLogin extends WebDriverTest {
 		RAHomePage homepage=new RAHomePage(driver);
 		LoginPage loginPage=homepage.clickOnLoginLink();
 		homepage=loginPage.loginWithValidUserId("dfsdfsfd", "dfsgd");
-		homepage.verifyHomePageLinks();
+		homepage.verifyPageElements();
 	}
 	
 	@Test
 	public void testBackToHomePageLink(){
 		RAHomePage homePage=new RAHomePage(driver);
 		LoginPage loginPage=homePage.clickOnLoginLink();
-		loginPage.verifyLoginPageEements();
+		loginPage.verifyPageElements();
 		homePage=loginPage.clickonBackToRideAuctionLink();
-		homePage.verifyHomePageLinks();
+		homePage.verifyPageElements();
 	}
 	
 	// Write The Test Case for Lost your Password

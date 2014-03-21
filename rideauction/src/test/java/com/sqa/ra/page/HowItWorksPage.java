@@ -14,4 +14,10 @@ public class HowItWorksPage extends RAPage {
 		//TODO  to be finished
 	}
 
+	@Override
+	public void verifyPageElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

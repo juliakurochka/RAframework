@@ -12,7 +12,7 @@ public class RAHomePage extends RAPage{
 	}
 	
 	
-	public void verifyHomePageLinks(){
+	public void verifyPageElements(){
 		verifyElementPresent(HOW_IT_WORKS_LNK);
 		verifyElementPresent(FAQ_LNK);
 		verifyElementPresent(ABOUT_US_LNK);
@@ -33,6 +33,9 @@ public class RAHomePage extends RAPage{
 		return new LoginPage(driver);
 		
 	}
+
+
+
 
 
 }

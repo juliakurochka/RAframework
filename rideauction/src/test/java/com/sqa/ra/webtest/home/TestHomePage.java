@@ -13,7 +13,7 @@ public class TestHomePage extends WebDriverTest{
 	public void testHomePaheLinks(){
 		
 		RAHomePage homePage=new RAHomePage(driver);
-		homePage.verifyHomePageLinks();
+		homePage.verifyPageElements();
 		
 	}
 	
@@ -33,7 +33,7 @@ public class TestHomePage extends WebDriverTest{
 		 //Verify User Logo On Home Page
 		 //homepage.verifyUserLogo
 		 //making change for test
-	  homePage.verifyHomePageLinks();
+	  homePage.verifyPageElements();
 	}
 	
 	/***
