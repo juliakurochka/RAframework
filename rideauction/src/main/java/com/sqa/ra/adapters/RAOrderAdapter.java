@@ -18,20 +18,17 @@ import com.sqa.ra.db.adapters.RADatabaseAdapter;
 
 /** test
  * 
- * �����-������� ��� ������ � ��������. �������� ������ ��� ������ � ����� ������
  * Class-adapter for working with orders. Contains methods for working with database
  *
  */
 public class RAOrderAdapter {
 
 	/**
-	 * ��������� ���������� � ������
 	 * Getting the order info
 	 * 
 	 */
 	static public Map<String, String> getOrderInfo( String orderID){
 		
-		// ������ �������
 		// The query string
 		String query = "select OrderNumber, OrderDateTime, OrderStatus, tblOrderDetail.*, " +
 				"CONCAT(tblVendorFN.meta_value, ' ', tblVendorLN.meta_value) as Vendor, " +
@@ -60,18 +57,15 @@ public class RAOrderAdapter {
 				"on tblOrderDetail.VendorId = tblVendorLN.user_id " +
 				"where tblOrder.orderId = " + orderID;
 		
-		// ��������� ������
 		// Perform a query
 		ResultSet resultQuery = RADatabaseAdapter.executeQuery( query);
 		HashMap<String, String> map = new HashMap<String, String>();
 		
-		// ���� ������� ������, ���������� null 
 		// If the selection is empty, return null
 		if (resultQuery == null) {
 			return null;
 		}
 		
-		// ��������� ������� �������
 		// Populate the table with data
 		try {
 			if (resultQuery.next()) {
@@ -97,7 +91,6 @@ public class RAOrderAdapter {
 	
 	/**
 	 * 
-	 * ��������� ������� ������ �� ��� ID
 	 * Getting the order status by its ID
 	 * 
 	 */
@@ -109,7 +102,6 @@ public class RAOrderAdapter {
 			String query = "select orderStatus from tblOrder where orderId = " + orderID;
 			ResultSet resultQuery = RADatabaseAdapter.executeQuery( query);
 
-			// ���� � ������� ���� ������, ���������� ������
 			// If selection has data, return status
 			if (resultQuery.next()) {
 
@@ -120,7 +112,6 @@ public class RAOrderAdapter {
 //			logger.severe("getStatus error: " + e1.getMessage());
 		}
 		
-		// � ������ ��������� ������ ��� ������ ���������� null
 		// If order or error is absent, return null
 		return null;
 
@@ -128,7 +119,6 @@ public class RAOrderAdapter {
 	
 	/**
 	 * 
-	 * ��������� ������� ������ � ID = orderID
 	 * Sets the status of the order with ID = orderId
 	 * 
 	 */
@@ -145,12 +135,10 @@ public class RAOrderAdapter {
 	
 	/**
 	 * 
-	 * ���������� ����������� ���������� ��� ��������� ��������
 	 * We return the information necessary for communications with vendors
 	 * 
 	 */
 	static public Map<String, String> getMessageInfo( String orderID){
-		// ������ �������
 		// The query string
 		String query = "select 'FromAirport' as type, tbldet.OrderId, tbldet.Price, tbldet.VendorPrice, tblfromair.DestinationAddress, null as OriginationAddress, tblcit.CityName as toPlace, tblair.Name as fromPlace, tbldet.PickUpTime as orderDate, tbldet.NoOfPassengers as Pax, case when tbldet.ExtraStop = '' or tbldet.ExtraStop = 'No' then null else tbldet.NoOfStops end as ExtraStop, case when tbldet.Extras = '' then null else tbldet.Extras end as Extras, tbldet.Car as carType, null as numOfHours, tblfromair.InternationalDomestic as typeLine, tblfromair.Gate as gate, tblfromair.Airline as airline " +
 				"from tblOrderDetail as tbldet left join tblFromAirport as tblfromair on tbldet.OrderId = tblfromair.OrderId " +
@@ -199,11 +187,9 @@ public class RAOrderAdapter {
 		ResultSet resultQuery;
 		
 		try {
-			// ��������� ������
 			// Perform a query 
 			resultQuery = RADatabaseAdapter.executeQuery( query);
 
-			// ���� ������� �� ������, ��������� ������� � �������
 			// If the selection is not empty, we fill in a table with data
 			if (resultQuery.next()) {
 
@@ -243,7 +229,6 @@ public class RAOrderAdapter {
 				map.put("gate", resultQuery.getString("gate"));
 				map.put("airline", resultQuery.getString("airline"));
 				
-				// ���������� �������������� �������
 				// We returning a generated table
 				return map;
 			}
@@ -254,7 +239,6 @@ public class RAOrderAdapter {
 		return new HashMap<String, String>();
 	}
 	
-	// ���� �������� ��������� ������, ���������� ���������� �� ����
 	// If change the status of an order, send a notice on the site
 	static public void sendChangeStatus(String id, HashMap<String, String> map){
 		String query = "";

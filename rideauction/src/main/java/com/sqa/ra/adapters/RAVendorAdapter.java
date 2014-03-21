@@ -25,7 +25,6 @@ public class RAVendorAdapter {
 	 */
 	static public ArrayList<RAVendor> getVendorsList( RAOrder order) {
 
-		// ������� ������ ��������
 		// Create a list of Vendors
 		ArrayList<RAVendor> list = new ArrayList<RAVendor>();
 		
@@ -35,7 +34,6 @@ public class RAVendorAdapter {
 			// Get Order ID          
 			String id = order.getID();
 			
-			// �������� ���� ������� �� ������
 			// Getting the travel date from the order 
 			ResultSet res = RADatabaseAdapter.executeQuery( 
 					"select PickUpTime as DateTime from tblOrderDetail where OrderId = " + id
@@ -45,7 +43,6 @@ public class RAVendorAdapter {
 			if (!res.next())
 				return list;
 			
-			// ������� ������� Calendar
 			// Create objects Calendar
 			Calendar cal = Calendar.getInstance();
 			Calendar cal2 = null;
@@ -53,11 +50,9 @@ public class RAVendorAdapter {
 			cal.setTimeInMillis(res.getLong("DateTime") * 1000);
 			cal2 = (Calendar) cal.clone();
 			
-			// �������� ���� ������
 			// Getting the day of the week
 			String day = cal.getDisplayName(Calendar.DAY_OF_WEEK, 1, java.util.Locale.ENGLISH);
 			
-			// �������� �������� UnixTime �� ������ ���
 			// Getting the value of UnixTime for the beginning of the day
 			cal.set(Calendar.MILLISECOND, 0);
 			cal.set(Calendar.SECOND, 0);
@@ -65,7 +60,6 @@ public class RAVendorAdapter {
 			cal.set(Calendar.HOUR_OF_DAY, 0);
 			String beginTime = Long.toString(cal.getTimeInMillis() / 1000);
 			
-			// �������� �������� UnixTime �� ����� ���
 			// Getting the value of UnixTime for the end of the day
 			cal.set(Calendar.MILLISECOND, 999);
 			cal.set(Calendar.SECOND, 59);
@@ -73,7 +67,6 @@ public class RAVendorAdapter {
 			cal.set(Calendar.HOUR_OF_DAY, 23);			
 			String endTime = Long.toString(cal.getTimeInMillis() / 1000);
 			
-			// �������� �������� UnixTime ��� ������� ������ ������ ���
 			// Getting the value for the time of the order within the day
 			cal2.set(Calendar.MILLISECOND, 0);
 			cal2.set(Calendar.YEAR, 1970);
@@ -81,7 +74,6 @@ public class RAVendorAdapter {
 			cal2.set(Calendar.DAY_OF_MONTH, 1);			
 			String time = Long.toString(cal2.getTimeInMillis() / 1000);
 			
-			// ����� ��������
 			// Select vendors
 			String query = "select distinct " +
 					"tblvendor.Id as vendorID, " +
@@ -224,12 +216,12 @@ public class RAVendorAdapter {
 					"on tblvendor.UserId = tblsettings.UserId " +
 					
 					"where " +
-					"(tblUserStatus.Status = 'Active' " + // # ������ �� ���������� ��������
-					"and VndorRating > 2 " + // # ������ �� ��������
+					"(tblUserStatus.Status = 'Active' " + // # 
+					"and VndorRating > 2 " + // #
 					"and ifnull(tblcount.countMessages, 0) < tblsettings.SmsLimit " +
-					"and tblvendorinfo.UserId is not null " + // # ������ �� ���������� ���������
+					"and tblvendorinfo.UserId is not null " + // # 
 					"and tblvendor.Del = 0) " +
-					"or tblvendor.UserId in (select VendorId as UserId from tblPreVendors) " + // # ��� ���� ��� pref vendor
+					"or tblvendor.UserId in (select VendorId as UserId from tblPreVendors) " + // #  pref vendor
 					
 					"order by " +
 					"priority, " +
@@ -238,18 +230,15 @@ public class RAVendorAdapter {
 				//	# Filter by number of vendors
 					"limit 10";
 				System.out.println(query);
-			// ��������� ������
 			// Perform a query
 			resultQuery = RADatabaseAdapter.executeQuery( query);
 
-			// ���� ��������� null, ���������� ������ ������
 			// If relult is null, return empty list
 			if (resultQuery == null)
 				return list;
 			
 		
 			
-			// ����� ��������� ������� ��������
 			// Otherwise, fill out a list of vendors
 			while (resultQuery.next()) {
 				
@@ -270,7 +259,6 @@ public class RAVendorAdapter {
 			
 		}
 
-		// ���������� ���������
 		// Return result
 		return list;
 
@@ -329,7 +317,6 @@ public class RAVendorAdapter {
 			// if the winner is received, write it to the database
 			if (resultQuery.next()) {
 				
-				// ���� ��� ����������� ����, ���������� 0, �� ��������� ���������� � ����
 				// If this is a price offer, return 0, without writing down a winner into the database
 				if (resultQuery.getInt("priority") == 4)
 					return 0;
@@ -344,16 +331,13 @@ public class RAVendorAdapter {
 				if (res == -1)
 					return res;
 				
-				// ��� �������� sms � email ���������� �������� ��� ������
 				// For sending an sms and the e-mail to the winner we are getting his data
 				//RATwilioAdapter tw = new RATwilioAdapter(conn);
 				RAVendor winner = getVendor( vendorId);
 				if (winner != null){													
 					
-					// ��������� ����� ������
 					// Shaping the text of the letter
 					
-					// �������� ������ ������
 					// Receiving the necessary data
 					Map<String, String> orderInfo = RAOrderAdapter.getOrderInfo( orderID);
 					Map<String, String> smsInfo = RAOrderAdapter.getMessageInfo( orderID);
@@ -361,7 +345,6 @@ public class RAVendorAdapter {
 					for (Entry<String, String> entry : smsInfo.entrySet())
 						orderInfo.put(entry.getKey(), entry.getValue());
 					
-					// ���������� ���������� sms
 					// Send sms to winner
 //					String message = RATemplates.getTemplate(conn, "sms", "ToWinner", 0);
 //					
@@ -386,14 +369,11 @@ public class RAVendorAdapter {
 						
 //						message = RATemplates.replaceMap(message, orderInfo, "mail");
 //						
-//						// ������ ������� � �������
 //						// Replacement of conditions in the template
 //						message = RATemplates.replaceCond(message);
-//						// ������ ������������
 //						// Replacement of mapping
 //						message = RATemplates.replaceTemplate(conn, message, "mail");
 //						
-//						// ���������� ������ ����������
 //						// Send email to winner 
 //						try {
 //							new Builder().host("rideauction.com")
@@ -468,7 +448,6 @@ public class RAVendorAdapter {
 //				logger.close();
 //				logger = null;
 				
-				// ���������� ��������� ���������� ������ � ����
 				// Returning the result from the updating data in the database
 				return res;
 				
@@ -485,12 +464,10 @@ public class RAVendorAdapter {
 	}
 	
 	/**
-	 * �������� ������� �� ��� ID
 	 * Get the Vendor by his ID
 	 */
 	public static RAVendor getVendor( String vendorId){
 		
-		// ��������� ������
 		// Perform a query
 		String query = "select tblVendors.id, tblVendors.userId, tblVendors.VendorPhone as toPhone, wp_users.user_email as mail from tblVendors " +
 				"left join wp_users " +
@@ -499,7 +476,6 @@ public class RAVendorAdapter {
 		ResultSet res = RADatabaseAdapter.executeQuery( query);
 		
 		try {
-			// ���� ������ ������, ������� � ���������� ������ � ����������� �������
 			// If the vendor has been found, create and return an object with the obtained data 
 			if (res.next()){
 				RAVendor vendor = new RAVendor(res.getString("id"), res.getString("userId"), res.getString("toPhone"), "+14152372615", "sms", res.getString("mail"),"");
@@ -508,7 +484,6 @@ public class RAVendorAdapter {
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 		}
-		// ����� ���������� null
 		// Else return null
 		return null;
 		
