@@ -54,6 +54,12 @@ public class RegistrationPage extends RAPage {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void waitForPageToLoad() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

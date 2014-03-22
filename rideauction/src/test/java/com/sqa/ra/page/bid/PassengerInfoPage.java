@@ -19,4 +19,10 @@ public class PassengerInfoPage extends RAPage {
 
 	}
 
+	@Override
+	public void waitForPageToLoad() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

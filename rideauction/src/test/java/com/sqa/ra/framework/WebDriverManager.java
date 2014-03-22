@@ -89,9 +89,9 @@ public class WebDriverManager {
 		
 		
 		driver.get(PropertyManager.getProperty("appurl"));
-		driver.manage().timeouts().
-		implicitlyWait(10, TimeUnit.SECONDS);
-		
+//		driver.manage().timeouts().
+//		implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 		return driver;
 		}catch(Exception ex){
 			ex.printStackTrace();

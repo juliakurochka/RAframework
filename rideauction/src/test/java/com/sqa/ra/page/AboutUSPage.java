@@ -20,4 +20,10 @@ public class AboutUSPage extends RAPage {
 		
 	}
 
+	@Override
+	public void waitForPageToLoad() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

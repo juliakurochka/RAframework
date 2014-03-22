@@ -11,6 +11,8 @@ public class BidOnRideToAirportPage extends RAPage{
 
 	public BidOnRideToAirportPage(WebDriver driver) {
 		super(driver);
+		
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -90,6 +92,12 @@ public class BidOnRideToAirportPage extends RAPage{
 		verifyAndClick(BID_BTN);
 		//very the terms and condition message
 		return new PassengerInfoPage(driver);
+	}
+
+	@Override
+	public void waitForPageToLoad() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

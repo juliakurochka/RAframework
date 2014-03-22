@@ -224,5 +224,11 @@ public class DatePickerPage extends RAPage {
 			return lookup.get(month).getNum();
 		}
 
+	}
+
+	@Override
+	public void waitForPageToLoad() {
+		// TODO Auto-generated method stub
+		
 	};
 }

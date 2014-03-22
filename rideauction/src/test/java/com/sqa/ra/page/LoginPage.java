@@ -31,6 +31,12 @@ public class LoginPage extends RAPage {
 		return new RAHomePage(driver);
 	}
 
+	@Override
+	public void waitForPageToLoad() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 	//Add the method for Lost Password page

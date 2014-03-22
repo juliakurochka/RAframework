@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static com.sqa.ra.framework.RAConstant.*;
 import org.testng.Assert;
 
 public abstract class RAPage {
@@ -14,8 +15,12 @@ public abstract class RAPage {
 	protected WebDriver driver;
 	
 	public RAPage(WebDriver driver){
-		this.driver=driver;		
+		this.driver=driver;
+		waitForPageToLoad();
+		verifyPageElements();
 	}
+	
+	public abstract void waitForPageToLoad();
 	
 	/**
 	 * To get Web Element
@@ -126,10 +131,28 @@ public abstract class RAPage {
 		wait.until(ExpectedConditions.presenceOfElementLocated(elmLocator));
 		
 	}
+	/**
+	 *  Wait for a element Present
+	 * @param elmLocator Locator of the element
+	 * @param timeInSecs time in seconds
+	 */
+	public void waitForElementPresent(By elmLocator){
+		WebDriverWait wait=new WebDriverWait(driver,WEBDRIVER_WAIT_TIME);
+		wait.until(ExpectedConditions.presenceOfElementLocated(elmLocator));
+		
+	}
 	public void waitForElementClickable(By elmLocator, long timeInSecs){
 		WebDriverWait wait = new WebDriverWait(driver, timeInSecs);
 		wait.until(ExpectedConditions.elementToBeClickable(elmLocator));
 	}
+	/*
+	 * without wait time
+	 */
+	public void waitForElementClickable(By elmLocator){
+		WebDriverWait wait = new WebDriverWait(driver, WEBDRIVER_WAIT_TIME);
+		wait.until(ExpectedConditions.elementToBeClickable(elmLocator));
+	}
+	
 
 	public void verifyElementSelected(By elmLocator){
 		WebElement elm=getElement(elmLocator);
