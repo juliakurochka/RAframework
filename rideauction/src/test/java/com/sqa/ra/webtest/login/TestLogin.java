@@ -8,7 +8,7 @@ import com.sqa.ra.page.RAHomePage;
 
 public class TestLogin extends WebDriverTest {
 	
-	@Test
+	@Test(enabled=false)
 	public void testLoginWithValidDetails(){
 		
 		RAHomePage homepage=new RAHomePage(driver);
