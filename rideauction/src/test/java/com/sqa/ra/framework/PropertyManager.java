@@ -9,21 +9,24 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 public class PropertyManager {
-	static final Logger logger=Logger.getLogger(PropertyManager.class);
+	static final Logger logger = Logger.getLogger(PropertyManager.class);
+
 	private static Properties props = null;
 
-		private PropertyManager(){
-			
-		}
+	private PropertyManager() {
+
+	}
+
 	public static String getProperty(String key) {
-		String value=System.getProperty(key);
+		String value = System.getProperty(key);
 		if (props == null) {
 			props = new Properties();
 			try {
-				//FileInputStream fis = new FileInputStream(
-				//		"C:\\sqa_class\\RARcProject\\src\\rideauction.properties");
-				InputStream fis=ClassLoader.getSystemClassLoader().getResourceAsStream("rideauction.properties");
-				
+				// FileInputStream fis = new FileInputStream(
+				// "C:\\sqa_class\\RARcProject\\src\\rideauction.properties");
+				InputStream fis = ClassLoader.getSystemClassLoader()
+						.getResourceAsStream("rideauction.properties");
+
 				props.load(fis);
 			} catch (FileNotFoundException fne) {
 				fne.printStackTrace();
@@ -32,16 +35,14 @@ public class PropertyManager {
 				ie.printStackTrace();
 			}
 		}
-		//String value=props.getProperty(key);
-		//logger.debug("value of key="+key+" value"+value);
-		if(value==null){
-			 value=props.getProperty(key);
-			
+
+		if (value == null) {
+			value = props.getProperty(key);
+
 		}
-		//System.out.println("value of key="+key+" value"+value);
-		logger.debug("value of key="+key+" value"+value);
+		logger.debug("key: " + key + " value: " + value);
 		return value;
-		//return props.getProperty(key);
+		// return props.getProperty(key);
 
 	}
 
