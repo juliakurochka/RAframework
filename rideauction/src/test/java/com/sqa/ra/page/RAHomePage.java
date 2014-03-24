@@ -39,6 +39,11 @@ public class RAHomePage extends RAPage{
 		return new BidOnRideToAirportPage(driver);
 		
 	}
+	
+	public BidOnRidePointToPointPage clickOnBidOnRidePointToPoint(){
+		verifyAndClick(BID_ON_RIDE_POINT_TO_POINT_BTN);
+		return new BidOnRidePointToPointPage(driver);
+	}
 
 
 	@Override
