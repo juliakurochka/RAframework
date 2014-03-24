@@ -14,6 +14,6 @@ public interface BidOnRidePointToPointPageLocators {
 	By PROMOCODE_FIELD = By.name("PromoCode");
 	By POINT_TO_POINT_SUBMIT_BTN = By
 			.cssSelector("#transfers input[type=submit]");
-	By BUY_BTN = By.id("garantserv");
+	By PRICECHECK_BTN = By.id("garantserv");
 
 }
