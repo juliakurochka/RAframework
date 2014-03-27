@@ -2,91 +2,80 @@ package com.sqa.ra.framework;
 
 import java.io.InputStream;
 
-import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.log4j.Logger;
 import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelReader {
 
+	@SuppressWarnings("static-access")
 	public static Object[][] readExcelData(String excelFileName,
 			String wSheetName) {
+		Logger logger = Logger.getLogger(ExcelReader.class);
+        logger.debug("FileName: " + excelFileName);
 		try {
 			// get input Stream
 			InputStream is = ClassLoader.getSystemClassLoader()
 					.getSystemResourceAsStream(excelFileName);
-			// Create te object of workbook
+			// Create the object of workbook
 
 			XSSFWorkbook excelFile = new XSSFWorkbook(is);
-			//get The worksheet
-			XSSFSheet workSheet=excelFile.getSheet(wSheetName);
-			
+			// get The worksheet
+			XSSFSheet workSheet = excelFile.getSheet(wSheetName);
+
 			System.out.println(workSheet.getLastRowNum());
-			int noOfRows=workSheet.getLastRowNum()+1;
-			int noOfCol=workSheet.getRow(0).getLastCellNum();
-			
-			
-			Object [][] data=new Object [noOfRows-1][noOfCol];
-			
+			int noOfRows = workSheet.getLastRowNum() + 1;
+			int noOfCol = workSheet.getRow(0).getLastCellNum();
+
+			Object[][] data = new Object[noOfRows - 1][noOfCol];
+
 			for (int i = 0; i < noOfRows - 1; i++) {
-				
-				XSSFRow row=workSheet.getRow(i+1);
-				
-				Object[] tempData=new Object[noOfCol];
-				boolean isRowContainValue=false;
+
+				XSSFRow row = workSheet.getRow(i + 1);
+
+				Object[] tempData = new Object[noOfCol];
+				boolean isRowContainValue = false;
 				for (int j = 0; j < noOfCol; j++) {
-					XSSFCell cell=row.getCell(j);
-					Object value=cellToObject(cell);
-					tempData[j]=value;
-					
-					if(cell==null){
+					XSSFCell cell = row.getCell(j);
+					Object value = cellToObject(cell);
+					tempData[j] = value;
+
+					if (cell == null) {
 						continue;
 					}
-					isRowContainValue=true;;
-					
+					isRowContainValue = true;
+					;
 				}
-				
-				if(isRowContainValue){
-					data[i]=tempData;
+				if (isRowContainValue) {
+					data[i] = tempData;
 				}
-				
-				
-				
-				
-				
-				
 			}
-			
-			
-			
 			return data;
-
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return null;
-
 	}
-	
-	private static Object  cellToObject(XSSFCell cell) {
+
+	private static Object cellToObject(XSSFCell cell) {
 		int type;
 		Object result;
-		if(cell==null){
+		if (cell == null) {
 			return null;
 		}
 		type = cell.getCellType();
 
 		switch (type) {
 		case XSSFCell.CELL_TYPE_NUMERIC: // 0
-				cell.setCellType(XSSFCell.CELL_TYPE_STRING);
-			//result = cell.getNumericCellValue();
-				result = cell.getStringCellValue();
-				
-				if("-".equals((String)result)){
-					result=null;
-				}
+			cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+			// result = cell.getNumericCellValue();
+			result = cell.getStringCellValue();
+
+			if ("-".equals((String) result)) {
+				result = null;
+			}
 			break;
 		case XSSFCell.CELL_TYPE_STRING: // 1
 			result = cell.getStringCellValue();
@@ -107,12 +96,10 @@ public class ExcelReader {
 		}
 		return result;
 	}
-	
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Object[][] dataObj = readExcelData(
-				"calcdata.xlsx", "Sheet1");
+		Object[][] dataObj = readExcelData("calcdata.xlsx", "Sheet1");
 		int noRows = dataObj.length;
 		int noOfCols = dataObj[0].length;
 		for (int i = 0; i < noRows; i++) {
