@@ -31,4 +31,6 @@ By HOME_PAGE_LOGO			= By.cssSelector("img[title=RideAuction]");
 	By LOGIN_LNK				= By.linkText("Login");
 	By REGISTRATION_LNK			= By.linkText("Registration");
 
+	By FOOTER_PRESENT           = By.cssSelector("div[class='wrapper footer']");
+
 }

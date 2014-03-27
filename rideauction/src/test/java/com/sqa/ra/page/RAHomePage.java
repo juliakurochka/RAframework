@@ -3,6 +3,7 @@ package com.sqa.ra.page;
 import org.openqa.selenium.WebDriver;
 
 import com.sqa.ra.framework.RAPage;
+
 import static com.sqa.ra.locator.home.HomePageLocator.*;
 
 public class RAHomePage extends RAPage{
@@ -11,6 +12,12 @@ public class RAHomePage extends RAPage{
 		
 	}
 	
+	@Override
+	public void waitForPageToLoad() {
+		waitForElementPresent(FOOTER_PRESENT);
+		
+	}
+
 	
 	public void verifyPageElements(){
 		verifyElementPresent(HOW_IT_WORKS_LNK);
@@ -46,11 +53,6 @@ public class RAHomePage extends RAPage{
 	}
 
 
-	@Override
-	public void waitForPageToLoad() {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 
