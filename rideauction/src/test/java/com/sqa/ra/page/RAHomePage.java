@@ -55,6 +55,13 @@ public class RAHomePage extends RAPage{
 
 
 
+	public BidOnRideBusStretchExPage clickOnBusStretchExoticCarRide(){
+		verifyAndClick(BID_ON_RIDE_BSEC_BTN);
+		return new BidOnRideBusStretchExPage(driver);
+	}
+
+
+
 
 
 
