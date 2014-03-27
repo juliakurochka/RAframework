@@ -1,5 +1,7 @@
 package com.sqa.ra.page;
 
+import static com.sqa.ra.locator.bid.BidOnRideAirportPageLocator.DATE_PICKER;
+import static com.sqa.ra.locator.bid.BidOnRideAirportPageLocator.PRICE_CHK_BTN;
 import static com.sqa.ra.locator.bid.BidOnRidePointToPointPageLocators.*;
 
 import org.openqa.selenium.By;
@@ -16,6 +18,7 @@ public class BidOnRidePointToPointPage extends RAPage {
 
 	@Override
 	public void waitForPageToLoad() {
+		waitForElementClickable(PRICE_CHK_BTN);
 	}
 
 	@Override
@@ -32,12 +35,20 @@ public class BidOnRidePointToPointPage extends RAPage {
 
 	}
 	
+	public DatePickerPage selectDatePicker(){
+		verifyAndClick(DATE_PICKER);
+		DatePickerPage dp=new DatePickerPage(driver);
+       return dp;
+	}
+	
 	public void submitAllFields(String noPassengers, String origAddress, String destAddress, String car) {
 
 		selectDropDownByVisibleText(PASSENGERS_DROPDOWN, noPassengers);
-		verifyAndClick(DATE_PICKER);
-		verifyAndClick(By.linkText(String.valueOf(Tomorrow.getTomorrow()
-				.getDate())));
+		
+		DatePickerPage dp = selectDatePicker();
+		dp.verifyPageElements();
+		dp.verifyAndClickDate(Tomorrow.getTomorrow().getDate());
+
 		selectDropDownByVisibleText(HOUR_PICKER, "5 PM");
 		selectDropDownByVisibleText(MINUTE_PICKER, ":15");
 		type(ORIGINATION_ADDRESS_FIELD,
@@ -48,5 +59,6 @@ public class BidOnRidePointToPointPage extends RAPage {
 		verifyAndClick(PRICECHECK_BTN);
 
 	}
+
 
 }
