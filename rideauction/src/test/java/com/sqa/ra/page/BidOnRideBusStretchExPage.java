@@ -21,8 +21,7 @@ public class BidOnRideBusStretchExPage extends RAPage{
 	Logger logger = Logger.getLogger(BidOnRideBusStretchExPage.class);
 	
 	public BidOnRideBusStretchExPage(WebDriver driver){
-		super(driver);
-		
+		super(driver);		
 	}
 	
 	@Override
@@ -38,7 +37,7 @@ public class BidOnRideBusStretchExPage extends RAPage{
 		verifyElementPresent(HOURS_SLCT_BOX);
 		verifyElementPresent(MIN_SLCT_BOX);
 		verifyElementPresent(ORIGIN_ADDRS_TEXT_BOX);
-		
+		verifyElementPresent(BUDGET_TEXT_BOX);
 	}
 
 	
@@ -66,9 +65,18 @@ public class BidOnRideBusStretchExPage extends RAPage{
 		setBudget( budget);
 		
 		
-//		verifyAndClick(EXOTIC_SUBMIT_BTN);
-		
+//		verifyAndClick(EXOTIC_SUBMIT_BTN);		
 	}
+	
+	/**
+	 * Verify we remain on the page when
+	 * the submit is not valid
+	 */
+	public void submitInvalidRequest(){
+		verifyAndClick(EXOTIC_SUBMIT_BTN);
+		verifyPageElements();
+	}
+	
 	public BidOnRideBusStretchExPage setDate(String date){
 		verifyAndClick(DATE_PICKER);
 		DatePickerPage dp=new DatePickerPage(driver);

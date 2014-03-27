@@ -28,4 +28,19 @@ public class TestBidOnRideBusStretchEx extends WebDriverTest{
 				 "555-1212",
 				 "200");
 	}
+	
+	@Test
+	public void testSubmitWithoutBudgetInvalid(){
+		BidOnRideBusStretchExPage stretchRidePg = homePage.clickOnBusStretchExoticCarRide();
+		stretchRidePg.
+			setPassengers("1").
+			setCarType("SUV Stretch (10+ Pass)").
+			setDate("04-01-2014").setHour("08").
+			setMin("30").
+			setOriginAddr(ORIGIN_ADDRS_TEXT_VALUE).
+			setReqDescr(DSCRB_REQ_TEXT_VALUE).
+			setEmail("phony@email.com").
+			setPhone("555-1212");
+		stretchRidePg.submitInvalidRequest();
+	}
 }
