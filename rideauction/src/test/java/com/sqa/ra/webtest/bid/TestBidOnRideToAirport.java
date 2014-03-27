@@ -9,10 +9,11 @@ public class TestBidOnRideToAirport extends WebDriverTest {
 	
 	@Test 
 	public void testBidOnRideToAirport(){
-		BidOnRideToAirportPage toAiportPage=homePage.clickOnBidOnRideToAirport();
-		toAiportPage.doPriceCheckAfterFillingRequiredFields("3", "03-23-2014", "2 AM", 
+		BidOnRideToAirportPage toAirportPage=homePage.clickOnBidOnRideToAirport();
+		// NOTE: a fixed date will go BAD once its past and cause the test to fail
+		toAirportPage.doPriceCheckAfterFillingRequiredFields("3", "07-30-2014", "2 AM", 
 				"SFO-San Francisco International", "140 San Pedro Road, Daly City, CA, United States");
-		toAiportPage.clickBuyButtonWithoutAcceptingTermsCheckBox();
+		toAirportPage.clickBuyButtonWithoutAcceptingTermsCheckBox();
 		
 	}
 	

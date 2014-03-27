@@ -11,14 +11,16 @@ public class BidOnRideToAirportPage extends RAPage{
 
 	public BidOnRideToAirportPage(WebDriver driver) {
 		super(driver);
+	}
+	
+	@Override
+	public void waitForPageToLoad() {
+		waitForElementClickable(PRICE_CHK_BTN);
 		
-		
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void verifyPageElements() {
-		// TODO Auto-generated method stub
 		verifyElementPresent(PSNGR_DROP_DOWN);
 		verifyElementPresent(DATE_PICKER);
 		verifyElementPresent(HOUR);
@@ -32,13 +34,18 @@ public class BidOnRideToAirportPage extends RAPage{
 		
 	}
 	
+	public DatePickerPage selectDatePicker(){
+		verifyAndClick(DATE_PICKER);
+		DatePickerPage dp=new DatePickerPage(driver);
+       return dp;
+	}
+	
 	public void doPriceCheckAfterFillingRequiredFields(String noPsngr,String pickUpDate,String hour,
 			String airport,String originAddress){
 		selectDropDownByVisibleText(PSNGR_DROP_DOWN, noPsngr);
 		//select a date using the date Picker Page
-		
-		verifyAndClick(DATE_PICKER);
-		DatePickerPage dp=new DatePickerPage(driver);
+
+		DatePickerPage dp = selectDatePicker();
 		dp.verifyPageElements();
 		dp.verifyAndClickDate(pickUpDate);
 		
@@ -65,6 +72,7 @@ public class BidOnRideToAirportPage extends RAPage{
 		
 	}
 	public void clickBuyButtonWithoutAcceptingTermsCheckBox(){
+		waitForElementClickable(BUY_BTN);
 		// add the verification of elements after price check
 		verifyAndClick(BUY_BTN);
 		//very the terms and condition message
@@ -72,6 +80,7 @@ public class BidOnRideToAirportPage extends RAPage{
 		verifyPageElements();
 	}
 	public PassengerInfoPage clickBuyButtonWithAcceptingTermsCheckBox(){
+		waitForElementClickable(BUY_BTN);
 		// add the verification of elements after price check
 		verifyAndClick(TERMS_CHK_BOX);
 		verifyAndClick(BUY_BTN);
@@ -79,6 +88,7 @@ public class BidOnRideToAirportPage extends RAPage{
 		return new PassengerInfoPage(driver);
 	}
 	public void clickBidButtonWithoutAcceptingTermsCheckBox(){
+		waitForElementClickable(BID_BTN);
 		// add the verification of elements after price check
 		verifyAndClick(BID_BTN);
 		//very the terms and condition message
@@ -86,6 +96,7 @@ public class BidOnRideToAirportPage extends RAPage{
 		verifyPageElements();
 	}
 	public PassengerInfoPage clickBidButtonWithAcceptingTermsCheckBox(String minAmt){
+		waitForElementClickable(BID_BTN);
 		// add the verification of elements after price check
 		verifyAndClick(TERMS_CHK_BOX);
 		type(BID_PRICE_TEXT_BOX, minAmt);
@@ -94,11 +105,6 @@ public class BidOnRideToAirportPage extends RAPage{
 		return new PassengerInfoPage(driver);
 	}
 
-	@Override
-	public void waitForPageToLoad() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 	
